@@ -16,6 +16,16 @@ canvas.height = window.innerHeight;
 // let G = Math.floor(Math.random() * 256);
 // let B = Math.floor(Math.random() * 256);
 
+const mouse = {
+    x: undefined,
+    y: undefined
+}
+
+window.addEventListener("mousemove", (e) => {
+    mouse.x = e.screenX;
+    mouse.y = e.screenY;
+    console.log(mouse)
+})
 
 //CREATE CIRCLE 
 class Circle {
@@ -51,15 +61,32 @@ class Circle {
 
         this.x += this.dx;
         this.y += this.dy;
+
+        //Interactivity
+        if(mouse.x - this.x < 20 && mouse.x - this.x > -20) {
+            this.radius++;
+        
+        } else if(this.radius > 10) {
+            this.radius--;
+        }
+
         this.draw()
     };
+
+  
+    
     
    
 }
 
+
+
 let circles = [];
 
-for(let i = 0; i < 100; i++) {
+
+
+
+for(let i = 0; i < 50; i++) {
         let radius = Math.floor(Math.random() * 70) + 10;
         let x = Math.floor(Math.random() * (innerWidth - radius * 2) + radius) ;
         let y = Math.floor(Math.random() * (innerHeight - radius * 2) + radius);
@@ -72,11 +99,14 @@ for(let i = 0; i < 100; i++) {
             green: Math.floor(Math.random() * 256),
             blue: Math.floor(Math.random() * 256)
         }
+        
+       
 
      circles.push(new Circle(x,y,dx,dy,radius,colour));
     
     }
 
+    
 
 function animate() {
     requestAnimationFrame(animate);
