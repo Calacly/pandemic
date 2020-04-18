@@ -16,14 +16,13 @@ console.log(x)
 console.log(y)
 console.log(radius)
 //CREATE CIRCLE 
-function Circle(x, y, dx, dy, radius) {
-    this.x = x;
-    this.y = y;
-    this.dx = dx;
-    this.dy = dy;
-    this.radius = radius;
+class Circle {
 
-    this.draw = function() {
+    constructor(x, y, dx, dy, radius) {
+    Object.assign(this, {x,y,dx,dy,radius});
+    }
+
+    draw() {
         
         c.beginPath();
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
@@ -33,7 +32,7 @@ function Circle(x, y, dx, dy, radius) {
 
     
 
-    this.update = function() {
+    update() {
         //Bounce logic:
     if(this.x + this.radius > innerWidth || this.x - this.radius < 0) {
         this.dx = -this.dx;
