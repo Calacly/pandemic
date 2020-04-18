@@ -12,9 +12,7 @@ let dx = speed;
 let dy = speed;
 let radius = 30;
 
-console.log(x)
-console.log(y)
-console.log(radius)
+
 //CREATE CIRCLE 
 class Circle {
 
@@ -23,10 +21,11 @@ class Circle {
     }
 
     draw() {
-        
+       
         c.beginPath();
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-        c.strokeStyle = "blue";
+        c.strokeStyle = "coral";
+        c.lineWidth = "2";
         c.stroke();
     }
 
@@ -51,6 +50,8 @@ class Circle {
    
 }
 
+let circles = [];
+
 let circle = new Circle(x,y,dx,dy,radius);
 
 
@@ -59,12 +60,7 @@ function animate() {
     c.clearRect(0, 0, innerWidth, innerHeight)
 
     circle.update()
-
-    c.beginPath();
-    c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    c.strokeStyle = "blue";
-    c.stroke();
-
+ 
 }
 
 

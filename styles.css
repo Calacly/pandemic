@@ -1,7 +1,29 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway|Varela+Round|Coda);
 body {
     margin: 0;
+    font-family: "coda";
 }
+
+
+
 
 canvas {
     border: 1px solid black;
+}
+
+.conatainer {
+    position: relative;
+}
+canvas {
+    position: absolute;
+}
+
+div h1 {
+    
+    position: absolute;
+    top: 40%;
+    left: 45%;
+    transform: translateX(-100px);
+    text-transform: uppercase;
+    border-bottom: 2px solid coral;
 }
