@@ -28,9 +28,9 @@ class Circle {
        
         c.beginPath();
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-        c.strokeStyle = "coral";
+        c.strokeStyle = "black";
         c.lineWidth = "2";
-        
+        c.fillStyle = `rgb(${this.colour.red},${this.colour.green},${this.colour.blue})`
         c.fill();
         c.stroke();
       
@@ -51,7 +51,6 @@ class Circle {
 
         this.x += this.dx;
         this.y += this.dy;
-        c.fillStyle = `rgb(${this.colour.red},${this.colour.green},${this.colour.blue})`
         this.draw()
     };
     
@@ -61,7 +60,7 @@ class Circle {
 let circles = [];
 
 for(let i = 0; i < 100; i++) {
-        let radius = 30;
+        let radius = Math.floor(Math.random() * 70) + 10;
         let x = Math.floor(Math.random() * (innerWidth - radius * 2) + radius) ;
         let y = Math.floor(Math.random() * (innerHeight - radius * 2) + radius);
         let speed = (Math.random() - 0.5) * 5;
