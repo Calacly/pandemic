@@ -4,28 +4,10 @@ const c = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-//CREATE CIRCLE VARIABLES 
-// let x = Math.floor(Math.random() * innerWidth) ;
-// let y = Math.floor(Math.random() * innerHeight);
-// let speed = (Math.random() - 0.5) * 10;
-// let dx = speed;
-// let dy = speed;
-// let radius = 30;
+// const catalyst = document.querySelector("h1").getBoundingClientRect();
 
-// let R = Math.floor(Math.random() * 256);
-// let G = Math.floor(Math.random() * 256);
-// let B = Math.floor(Math.random() * 256);
+let circles = [];
 
-const mouse = {
-    x: undefined,
-    y: undefined
-}
-
-window.addEventListener("mousemove", (e) => {
-    mouse.x = e.screenX;
-    mouse.y = e.screenY;
-    console.log(mouse)
-})
 
 //CREATE CIRCLE 
 class Circle {
@@ -40,7 +22,7 @@ class Circle {
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
         c.strokeStyle = "black";
         c.lineWidth = "2";
-        c.fillStyle = `rgb(${this.colour.red},${this.colour.green},${this.colour.blue})`
+        c.fillStyle = this.colour;
         c.fill();
         c.stroke();
       
@@ -48,7 +30,38 @@ class Circle {
 
 
 
-    update() {
+    update(circles) {
+
+     
+
+        for(let i = 0; i < circles.length; i++) {
+            if(this === circles[i]) continue;
+        
+            if(getDistance(this.x,this.y,circles[i].x,circles[i].y) - this.radius * 2 < 0) {
+                switch(this.colour) {
+                    case "blue":
+                    case "green":
+                        if(circles[i].colour === "blue" || circles[i].colour === "green"){
+                            console.log("No infection or immune.")
+                        }
+                        break;
+                    case "red":
+                        if(circles[i].colour !== "green") {
+                            circles[i].colour = "red";
+                        }
+                        break;
+                }
+        
+        
+                if(this.colour === "red") {
+                   setTimeout(() => {
+                    this.colour = "green"
+                  }, 20000)
+                }
+               
+            }
+        }
+
         //Bounce logic:
     if(this.x + this.radius > innerWidth || this.x - this.radius < 0) {
         this.dx = -this.dx;
@@ -62,13 +75,7 @@ class Circle {
         this.x += this.dx;
         this.y += this.dy;
 
-        //Interactivity
-        if(mouse.x - this.x < 20 && mouse.x - this.x > -20) {
-            this.radius++;
         
-        } else if(this.radius > 10) {
-            this.radius--;
-        }
 
         this.draw()
     };
@@ -81,23 +88,35 @@ class Circle {
 
 
 
-let circles = [];
 
 
+setTimeout(() => {
+    circles[0].colour = "red";
+}, 10000);
 
 
-for(let i = 0; i < 50; i++) {
-        let radius = Math.floor(Math.random() * 70) + 10;
+for(let i = 0; i < 30; i++) {
+        let radius = 15;
         let x = Math.floor(Math.random() * (innerWidth - radius * 2) + radius) ;
         let y = Math.floor(Math.random() * (innerHeight - radius * 2) + radius);
-        let speed = (Math.random() - 0.5) * 5;
+        let speed = (Math.random() - 0.5) * 2;
         let dx = speed;
         let dy = speed;
-        //Create a random colour for each circle
-        let colour = {
-            red: Math.floor(Math.random() * 256),
-            green: Math.floor(Math.random() * 256),
-            blue: Math.floor(Math.random() * 256)
+        let colour = "blue";
+
+        //Make sure generated circles do not overlap
+        if(i !== 0) {
+            for(let j = 0; j < circles.length; j ++) {
+             if(getDistance(x,y,circles[j].x,circles[j].y) - radius * 2 < 0) {
+                x = Math.floor(Math.random() * (innerWidth - radius * 2) + radius) ;
+                y = Math.floor(Math.random() * (innerHeight - radius * 2) + radius);
+                
+                //we need minus 1 here because the j ++ increments j by 1 at the 
+                //end of the loop. So if we set it to 0 it will increment it to 1
+                //and we want to restart from 0.
+                j = -1;
+             }
+            }
         }
         
        
@@ -112,13 +131,21 @@ function animate() {
     requestAnimationFrame(animate);
     c.clearRect(0, 0, innerWidth, innerHeight)
 
-    for(let i = 0; i < circles.length; i++) {
-        circles[i].update()
-    }
- 
+    circles.forEach(circle => {
+        circle.update(circles)
+    }) 
 }
 
 
 
 animate()
 
+
+function getDistance(x1,y1,x2,y2) {
+    let xDistance = x2 - x1;
+    let yDistance = y2 - y1;
+
+    return Math.sqrt(xDistance ** 2 + yDistance ** 2);
+}
+
+//Note ** is the same as using Math.pow()

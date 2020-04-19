@@ -22,8 +22,17 @@ div h1 {
     
     position: absolute;
     top: 40%;
-    left: 45%;
+    left: 51%;
     transform: translateX(-100px);
     text-transform: uppercase;
-    border-bottom: 2px solid coral;
+    border-bottom: 2px solid black;
+    border-top: 2px solid red;
+}
+
+span:nth-of-type(even) {
+    color: red;
+}
+
+span:hover {
+    font-size: 30px;
 }
