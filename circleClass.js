@@ -7,7 +7,8 @@ canvas.height = window.innerHeight;
 // const catalyst = document.querySelector("h1").getBoundingClientRect();
 
 let circles = [];
-
+let people = 20;
+let infectedPeople = [];
 
 //CREATE CIRCLE 
 class Circle {
@@ -32,7 +33,7 @@ class Circle {
 
     update(circles) {
 
-     
+     console.log(infectedPeople.length);
 
         for(let i = 0; i < circles.length; i++) {
             if(this === circles[i]) continue;
@@ -48,12 +49,18 @@ class Circle {
                     case "red":
                         if(circles[i].colour !== "green") {
                             circles[i].colour = "red";
-                        }
+                            circles[i].infected = true;
+                            
+                        }    
                         break;
                 }
         
         
                 if(this.colour === "red") {
+                    // setTimeout(() => {
+                    //     let died = Math.floor((3.8 / 100) * people);
+                    //     circles[died].colour = "white";
+                    // },3000)
                    setTimeout(() => {
                     this.colour = "green"
                   }, 20000)
@@ -92,10 +99,13 @@ class Circle {
 
 setTimeout(() => {
     circles[0].colour = "red";
+    circles[0].infected = true;
+    infectedPeople.push(circles[0]);
+    console.log("First infection");
 }, 10000);
 
 
-for(let i = 0; i < 30; i++) {
+for(let i = 0; i < people; i++) {
         let radius = 15;
         let x = Math.floor(Math.random() * (innerWidth - radius * 2) + radius) ;
         let y = Math.floor(Math.random() * (innerHeight - radius * 2) + radius);
@@ -103,6 +113,7 @@ for(let i = 0; i < 30; i++) {
         let dx = speed;
         let dy = speed;
         let colour = "blue";
+        let infected = "false";
 
         //Make sure generated circles do not overlap
         if(i !== 0) {
@@ -121,7 +132,7 @@ for(let i = 0; i < 30; i++) {
         
        
 
-     circles.push(new Circle(x,y,dx,dy,radius,colour));
+     circles.push(new Circle(x,y,dx,dy,radius,colour,infected));
     
     }
 
