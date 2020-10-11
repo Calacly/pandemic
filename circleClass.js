@@ -4,6 +4,7 @@ const c = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+
 // const catalyst = document.querySelector("h1").getBoundingClientRect();
 
 let circles = [];
@@ -160,3 +161,6 @@ function getDistance(x1,y1,x2,y2) {
 }
 
 //Note ** is the same as using Math.pow()
+
+
+

@@ -1,3 +1,5 @@
+// testing 
+
 for(let i = 0; i < circles.length; i++) {
     if(this === circles[i]) {continue};
 
