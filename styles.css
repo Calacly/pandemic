@@ -25,6 +25,7 @@ div h1 {
     text-transform: uppercase;
     border-bottom: 2px solid black;
     border-top: 2px solid red;
+    cursor: pointer;
 }
 
 span:nth-of-type(even) {

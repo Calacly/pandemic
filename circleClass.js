@@ -4,6 +4,9 @@ const c = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+document.getElementById("pandemic").addEventListener("click", () => {
+   location.reload();
+});
 
 // const catalyst = document.querySelector("h1").getBoundingClientRect();
 
@@ -122,10 +125,6 @@ for(let i = 0; i < people; i++) {
              if(getDistance(x,y,circles[j].x,circles[j].y) - radius * 2 < 0) {
                 x = Math.floor(Math.random() * (innerWidth - radius * 2) + radius) ;
                 y = Math.floor(Math.random() * (innerHeight - radius * 2) + radius);
-                
-                //we need minus 1 here because the j ++ increments j by 1 at the 
-                //end of the loop. So if we set it to 0 it will increment it to 1
-                //and we want to restart from 0.
                 j = -1;
              }
             }
@@ -160,7 +159,7 @@ function getDistance(x1,y1,x2,y2) {
     return Math.sqrt(xDistance ** 2 + yDistance ** 2);
 }
 
-//Note ** is the same as using Math.pow()
+
 
 
 
