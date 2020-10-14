@@ -9,7 +9,7 @@
 * Red = infected
 * Green = recovered and immune
 
-To `reload the animation` simply click on the pandemic heading in the middle of the frame.
+To `reload the animation` click on the pandemic heading in the middle of the frame - this will simply refresh the page.
 
 
 
